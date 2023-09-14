@@ -9,6 +9,8 @@ import {
   Put,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
+import { UpdatePutUserDTO } from './dto/update-put-user.dto';
+import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -28,19 +30,29 @@ export class UserController {
   }
 
   @Put(':id')
-  async update(@Body() body, @Param() param) {
+  async update(
+    @Body() { name, email, password }: UpdatePutUserDTO,
+    @Param() param,
+  ) {
     return {
       method: 'put',
-      body,
+      name,
+      email,
+      password,
       param,
     };
   }
 
   @Patch(':id')
-  async updatePartial(@Body() body, @Param() param) {
+  async updatePartial(
+    @Body() { name, email, password }: UpdatePatchUserDTO,
+    @Param() param,
+  ) {
     return {
       method: 'patch',
-      body,
+      name,
+      email,
+      password,
       param,
     };
   }
