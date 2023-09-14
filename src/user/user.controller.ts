@@ -26,41 +26,41 @@ export class UserController {
   }
 
   @Get(':id')
-  async findUnique(@Param() param) {
-    return { user: {}, param };
+  async findUnique(@Param('id', ParseIntPipe) id: number) {
+    return { user: {}, id };
   }
 
   @Put(':id')
   async update(
     @Body() { name, email, password }: UpdatePutUserDTO,
-    @Param() param,
+    @Param('id', ParseIntPipe) id: number,
   ) {
     return {
       method: 'put',
       name,
       email,
       password,
-      param,
+      id,
     };
   }
 
   @Patch(':id')
   async updatePartial(
     @Body() { name, email, password }: UpdatePatchUserDTO,
-    @Param() param,
+    @Param('id', ParseIntPipe) id: number,
   ) {
     return {
       method: 'patch',
       name,
       email,
       password,
-      param,
+      id,
     };
   }
 
   @Delete(':id')
   // convertendo o id em string para number;
-  async delete(@Param('id', ParseIntPipe) id) {
+  async delete(@Param('id', ParseIntPipe) id: number) {
     return {
       id,
     };
