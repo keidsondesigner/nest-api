@@ -1,3 +1,4 @@
+import { UserService } from './user.service';
 import {
   Body,
   Controller,
@@ -15,9 +16,11 @@ import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
 
 @Controller('users')
 export class UserController {
+  ///
+  constructor(private readonly userService: UserService) {}
   @Post()
   async create(@Body() { name, email, password }: CreateUserDTO) {
-    return { name, email, password };
+    return await this.userService.create({ name, email, password });
   }
 
   @Get()
