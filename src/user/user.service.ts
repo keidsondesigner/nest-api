@@ -14,4 +14,14 @@ export class UserService {
       data: { email, name, password },
     });
   }
+
+  async list() {
+    return await this.prisma.user.findMany();
+  }
+
+  async show(id: number) {
+    return await this.prisma.user.findUnique({
+      where: { id },
+    });
+  }
 }

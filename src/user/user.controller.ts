@@ -24,13 +24,13 @@ export class UserController {
   }
 
   @Get()
-  async findMany() {
-    return { users: [] };
+  async list() {
+    return await this.userService.list();
   }
 
-  @Get(':id')
-  async findUnique(@Param('id', ParseIntPipe) id: number) {
-    return { user: {}, id };
+  @Get(':id') // ParseIntPipe fazendo a conversão id 'string' para 'number';
+  async show(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.show(id);
   }
 
   @Put(':id')
